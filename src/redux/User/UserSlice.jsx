@@ -1,11 +1,11 @@
 import cookieSet from "@/hooks/cookieSet";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import Cookies from "js-cookie";
 import mongoose from "mongoose";
-import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-export const loginSubmit = createAsyncThunk("/user/login", async (values,thunkAPI) => {
+export const loginSubmit = createAsyncThunk("/user/login", async (values, thunkAPI) => {
     try {
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, values)
         return res.data;
@@ -14,9 +14,9 @@ export const loginSubmit = createAsyncThunk("/user/login", async (values,thunkAP
     }
 })
 
-export const registerSubmit = createAsyncThunk("/user/register", async (values,thunkAPI) => {
+export const registerSubmit = createAsyncThunk("/user/register", async (values, thunkAPI) => {
     try {
-        const registerValues = {username: values.username, email:values.email, password: values.password}
+        const registerValues = { username: values.username, email: values.email, password: values.password }
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/register`, registerValues);
         return res.data;
     } catch (error) {
@@ -32,7 +32,7 @@ export const getUser = createAsyncThunk("/get-user/", async (username) => {
 export const updateUserDetails = createAsyncThunk("/user/updateUserDetails", async (_, { getState }) => {
     const { user } = getState();
     const values = user.userInformation;
-    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/update-user-details`, { id:values.id, firstName: values.firstName, lastName: values.lastName, email: values.email, profilePicture: values.profilePicture })
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/update-user-details`, { id: values.id, firstName: values.firstName, lastName: values.lastName, email: values.email, profilePicture: values.profilePicture, profileColor: values.profileColor, isHiddenEmail: values.isHiddenEmail })
     return res.data;
 })
 
@@ -46,16 +46,18 @@ export const updateLinks = createAsyncThunk("/user/updateLinks", async (_, { get
 
 const initialState = {
     isLoginned: false,
-    userInformation: { id: "", email: "", username: "", firstName: "", lastName: "", profilePicture: "", links: [] },
+    userInformation: { id: "", email: "", username: "", firstName: "", lastName: "", profilePicture: "", isHiddenEmail: false, profileColor: "#FFFF", links: [] },
+    backupInformation: { id: "", email: "", username: "", firstName: "", lastName: "", profilePicture: "", isHiddenEmail: false, profileColor: "#FFFF", links: [] },
     newProfilePicture: "",
-    buttonStatus: true
+    buttonStatus: true,
+    isChanged: false
 }
 
 const UserSlice = createSlice({
     name: "User",
     initialState,
     reducers: {
-        addLink: (state, action) => {
+        addLink: (state) => {
             const newID = new mongoose.Types.ObjectId().toString();
             state.userInformation = {
                 ...state.userInformation,
@@ -64,7 +66,7 @@ const UserSlice = createSlice({
                     {
                         _id: newID,
                         platform: "Twitter",
-                        link: ""
+                        link: "https://"
                     }
                 ]
             }
@@ -89,10 +91,28 @@ const UserSlice = createSlice({
             state.userInformation = { ...state.userInformation, links: action.payload }
         },
         editProfile: (state, action) => {
-            state.userInformation = { ...state.userInformation, [action.payload.name]: action.payload.value }
+            if (action.payload.type === "checkbox") {
+                state.userInformation = { ...state.userInformation, [action.payload.name]: action.payload.checked }
+            } else {
+                state.userInformation = { ...state.userInformation, [action.payload.name]: action.payload.value }
+            }
         },
-        setNewProfilePicture: (state, action) => { 
+        setNewProfilePicture: (state, action) => {
             state.newProfilePicture = action.payload;
+        },
+        setLogout: (state) => {
+            state.isLoginned = false;
+            state.userInformation = { id: "", email: "", username: "", firstName: "", lastName: "", profilePicture: "", links: [] };
+            state.backupInformation = { id: "", email: "", username: "", firstName: "", lastName: "", profilePicture: "", links: [] };
+            Cookies.remove("token");
+        },
+        setIsChanged: (state, action) => {
+            state.isChanged = action.payload;
+        },
+        setUserInformation: (state, action) => {
+            state.userInformation = action.payload;
+            state.backupInformation = action.payload;
+            state.newProfilePicture = "";
         }
     },
     extraReducers: (builder) => {
@@ -102,44 +122,50 @@ const UserSlice = createSlice({
             cookieSet("token", action.payload.token)
             toast.success(action.payload.message);
             state.buttonStatus = true;
-        }).addCase(registerSubmit.rejected, (state,action) => {
-          toast.error(action.payload.response.data.message) ;
-          state.buttonStatus = true;
-        }).addCase(registerSubmit.pending, (state,action) => {
-            state.buttonStatus = false;
-        }),
-        builder.addCase(loginSubmit.fulfilled, (state, action) => {
-            state.isLoginned = true;
-            state.userInformation = action.payload.user;
-            cookieSet("token", action.payload.token)
-            toast.success(action.payload.message);
+        }).addCase(registerSubmit.rejected, (state, action) => {
+            toast.error(action.payload.response.data.message);
             state.buttonStatus = true;
-        }).addCase(loginSubmit.rejected, (state,action) => {
-          toast.error(action.payload.response.data.message)  
-          state.buttonStatus = true;
-        }).addCase(loginSubmit.pending, (state,action) => {
+        }).addCase(registerSubmit.pending, (state) => {
             state.buttonStatus = false;
         }),
-        builder.addCase(updateUserDetails.fulfilled, (state,action) => {
-            state.userInformation = action.payload.user;
-            toast.success(action.payload.message); 
-            state.buttonStatus = true;
-        }).addCase(updateUserDetails.pending, (state,action) => {
-            state.buttonStatus = false;
-        }),
-        builder.addCase(updateLinks.fulfilled, (state,action) => {
-            state.userInformation = action.payload.user;   
-            toast.success(action.payload.message);
-            state.buttonStatus = true;
-        }).addCase(updateLinks.pending, (state,action) => {
-            state.buttonStatus = false;
-        }),
-        builder.addCase(getUser.fulfilled, (state,action) => {
-            state.userInformation = action.payload.user;   
-        })
+            builder.addCase(loginSubmit.fulfilled, (state, action) => {
+                state.isLoginned = true;
+                state.userInformation = action.payload.user;
+                cookieSet("token", action.payload.token)
+                toast.success(action.payload.message);
+                state.buttonStatus = true;
+            }).addCase(loginSubmit.rejected, (state, action) => {
+                toast.error(action.payload.response.data.message)
+                state.buttonStatus = true;
+            }).addCase(loginSubmit.pending, (state) => {
+                state.buttonStatus = false;
+            }),
+            builder.addCase(updateUserDetails.fulfilled, (state, action) => {
+                state.userInformation = action.payload.user;
+                state.backupInformation = action.payload.user;
+                toast.success(action.payload.message);
+                state.buttonStatus = true;
+            }).addCase(updateUserDetails.pending, (state) => {
+                state.buttonStatus = false;
+            }),
+            builder.addCase(updateLinks.fulfilled, (state, action) => {
+                state.userInformation = action.payload.user;
+                state.backupInformation = action.payload.user;
+                toast.success(action.payload.message);
+                state.buttonStatus = true;
+            }).addCase(updateLinks.pending, (state) => {
+                state.buttonStatus = false;
+            }),
+            builder.addCase(getUser.fulfilled, (state, action) => {
+                state.userInformation = action.payload.user;
+                state.backupInformation = action.payload.user;
+            }).addCase(getUser.rejected, (state) => {
+                state.userInformation = { id: "", email: "", username: "", firstName: "", lastName: "", profilePicture: "", isHiddenEmail: false, profileColor: "#FFFF", links: [] }
+                state.backupInformation = { id: "", email: "", username: "", firstName: "", lastName: "", profilePicture: "", isHiddenEmail: false, profileColor: "#FFFF", links: [] }
+            })
     }
 })
 
 export default UserSlice.reducer;
 
-export const { addLink, editLink, deleteLink, swapLinks, editProfile, setNewProfilePicture } = UserSlice.actions;
+export const { addLink, editLink, deleteLink, swapLinks, editProfile, setNewProfilePicture, setLogout, setIsChanged, setUserInformation } = UserSlice.actions;

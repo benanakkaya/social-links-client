@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  background-color: #FAFAFA;
-}
 
 @layer utilities {
     /* Chrome, Safari and Opera */

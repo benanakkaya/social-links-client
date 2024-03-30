@@ -6,7 +6,7 @@ const Logo = () => {
     return (
         <Link href="/" className="text-xl md:text-2xl flex items-center gap-2 py-4 px-8 font-bold ">
             <GiQuillInk className="text-primary text-3xl" /> 
-            <span className='hidden md:block'>
+            <span className=''>
             Social Links
             </span>
         </Link>

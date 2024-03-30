@@ -1,5 +1,5 @@
 "use client"
-import { addLink } from '@/redux/User/UserSlice';
+import { addLink, setIsChanged } from '@/redux/User/UserSlice';
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -9,6 +9,7 @@ const CostumizeLinks = () => {
 
     const handleNewLink = () => {
         dispatch(addLink())
+        dispatch(setIsChanged(true));
     }
 
     return (

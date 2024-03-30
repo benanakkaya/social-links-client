@@ -109,7 +109,7 @@ const RegisterForm = () => {
                     {buttonStatus === false &&
                         <AiOutlineLoading3Quarters className="animate-spin " />
                     }
-                    Login
+                    Register
                 </button>
             </form>
             <div className='w-full flex items-center justify-center gap-2 text-sm'>

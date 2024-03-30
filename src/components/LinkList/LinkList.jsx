@@ -5,7 +5,7 @@ import NewLink from '../Forms/NewLink'
 import { useSelector } from 'react-redux'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { useDispatch } from 'react-redux'
-import { swapLinks } from '@/redux/User/UserSlice'
+import { setIsChanged, swapLinks } from '@/redux/User/UserSlice'
 import EmptyList from './components/EmptyList'
 
 export const platforms = [
@@ -88,7 +88,7 @@ export const platforms = [
     },
 ]
 
-const LinkList = ({setButtonDisable}) => {
+const LinkList = () => {
 
     const [activeLink, setActiveLink] = useState(null);
 
@@ -101,10 +101,11 @@ const LinkList = ({setButtonDisable}) => {
         const [removedItem] = links.splice(result.source.index, 1)
         links.splice(result.destination?.index, 0, removedItem);
         dispatch(swapLinks(links))
+        dispatch(setIsChanged(true));
     }
 
     return (
-        <div className='flex-1 overflow-y-auto px-2'>
+        <div className='flex-1 overflow-y-auto'>
             {userInformation.links?.length > 0 ?
                 <DragDropContext onDragEnd={handleDragEnd}>
                     <Droppable droppableId={userInformation.id}>
@@ -113,7 +114,7 @@ const LinkList = ({setButtonDisable}) => {
                                 {userInformation.links?.map((item, index) => (
                                     <Draggable key={item._id ? item._id : "1"} draggableId={item._id ? item._id : "1"} index={index}>
                                         {(provided) => (
-                                            <NewLink provided={provided} activeLink={activeLink} setActiveLink={setActiveLink} platforms={platforms} item={item} index={index} />
+                                            <NewLink setIsChanged={setIsChanged} provided={provided} activeLink={activeLink} setActiveLink={setActiveLink} platforms={platforms} item={item} index={index} />
                                         )}
                                     </Draggable>
                                 ))}
