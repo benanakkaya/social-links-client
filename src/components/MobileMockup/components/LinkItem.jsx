@@ -1,5 +1,4 @@
 "use client"
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 const LinkItem = ({platforms,item}) => {
@@ -13,10 +12,10 @@ const LinkItem = ({platforms,item}) => {
 
   return (
     <li className='w-full'>
-      <Link href={item.link} target='_blank' className={`h-[44px] w-full flex items-center justify-center gap-3 rounded-lg ${platform.bgcolor} ${platform.textcolor} `}>
+      <a href={item.link} target='_blank' className={`h-[44px] w-full flex items-center justify-center gap-3 rounded-lg ${platform.bgcolor} ${platform.textcolor} `}>
         {platform.icon}
         {platform.name}
-        </Link>
+        </a>
     </li>
   )
 }
