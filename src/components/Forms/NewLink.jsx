@@ -95,7 +95,7 @@ const NewLink = ({ platforms, item, index, activeLink, setActiveLink,provided,se
                 Link
                 <div className={`${error ? "border-red-500": "border-secondary "} border-[2px] px-3 py-2 bg-white flex items-center gap-2 text-sm rounded-lg relative`}>
                     <FaLink />
-                    <input onBlur={urlControl} value={item.link} onChange={(e) => handleLink(e, index)} placeholder={error ? '' :'e.g. https://www.twitter.com/elonmusk'} type="text" className={`flex-1 outline-none`} />
+                    <input onBlur={urlControl} value={item.link} onChange={(e) => handleLink(e, index)} placeholder={error ? '' :'e.g. https://www.twitter.com/elonmusk'} type="url" className={`flex-1 outline-none`} />
                     {error && 
                     <span className='absolute  top-full right-0 mt-[5px] italic text-xs text-red-500'>
                         Please enter valid url!
