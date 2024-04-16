@@ -56,8 +56,10 @@ const ProfilePage = () => {
                             Add your details to create a personal touch to your profile.
                         </p>
                     </div>
-                    <AddProfilePicture />
-                    <UserProfileForm errors={errors} setErrors={setErrors} userInformation={userInformation} />
+                    <div className="flex flex-col gap-6">
+                        <AddProfilePicture />
+                        <UserProfileForm errors={errors} setErrors={setErrors} userInformation={userInformation} />
+                    </div>
                     <div className='p-3 flex items-center gap-4 justify-end'>
                         {isChanged === true &&
                             <button onClick={handleDiscardChanges} className={`bg-opacity-100 flex items-center justify-center gap-1 w-full md:w-32 bg-gray-600 text-white rounded-lg px-5 py-2 font-bold`}>

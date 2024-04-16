@@ -21,11 +21,11 @@ const AddProfilePicture = () => {
     }
 
     return (
-        <label className='p-3 flex flex-col gap-2 md:flex-row md:items-center justify-between bg-[#FAFAFA] text-[#737373] rounded-lg'>
-            <p className='flex-1'>
+        <label className='px-3 grid grid-cols-4 gap-2 md:gap-5 md:flex-row md:items-center justify-between bg-[#FAFAFA] text-[#737373] rounded-lg'>
+            <p className='col-span-4 md:col-span-1'>
                 Profile Picture
             </p>
-            <div className='flex-1 flex flex-col md:flex-row items-center gap-4'>
+            <div className='col-span-4 md:col-span-3 flex flex-col md:flex-row items-center gap-4'>
                 <input
                     id="image"
                     name="image"
@@ -33,13 +33,14 @@ const AddProfilePicture = () => {
                     ref={fileInputRef}
                     onChange={(e) => handleChange(e)}
                     className='hidden' type='file' />
-                <button onClick={handleClick} className='flex  flex-col items-center justify-center gap-3 h-48 w-48 text-lg text-primary bg-secondary rounded-2xl flex-2'>
+                <button onClick={handleClick} className='flex  flex-col items-center justify-center gap-3 w-full h-48 text-lg text-primary bg-secondary rounded-2xl flex-2'>
                     <FaImage />
-                    Upload Image
+                    Click to add a photo   <br/>
+                    <span className='text-xs italic text-gray-400'>
+                    (It is recommended that the image is 1:1)
+                </span> 
                 </button>
-                <p className='text-xs flex-1'>
-                    It is recommended that the image you select is 1:1.
-                </p>
+                
             </div>
         </label>
     )

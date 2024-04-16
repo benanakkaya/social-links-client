@@ -37,7 +37,7 @@ const UserProfileForm = ({ userInformation, setErrors, errors }) => {
     }
 
     return (
-        <div className='bg-[#FAFAFA] text-[#737373] rounded-lg py-6 px-3'>
+        <div className='bg-[#FAFAFA] text-[#737373] rounded-lg px-3'>
             <form className='flex flex-col gap-6'>
                 <label className='w-full grid grid-cols-4 gap-2 md:gap-5 items-center relative'>
                     <span className='col-span-4 md:col-span-1'>
@@ -80,7 +80,9 @@ const UserProfileForm = ({ userInformation, setErrors, errors }) => {
                     <span className='col-span-4 md:col-span-1'>
                         Hidden Email
                     </span>
-                    <input onBlur={(e) => inputControl(e)} onChange={(e) => handleChange(e)} name='isHiddenEmail'  checked={userInformation.isHiddenEmail} type='checkbox'  />
+                    <span className='col-span-4 md:col-span-3 flex items-center'>
+                    <input className='accent-primary w-4 h-4  ' onBlur={(e) => inputControl(e)} onChange={(e) => handleChange(e)} name='isHiddenEmail'  checked={userInformation.isHiddenEmail} type='checkbox'  />
+                    </span>
                 </label>
                 <label className='w-full grid grid-cols-4 gap-2 md:gap-5 items-center relative'>
                     <span className='col-span-4 md:col-span-1'>
