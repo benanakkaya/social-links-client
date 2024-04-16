@@ -2,7 +2,6 @@ import Image from 'next/image'
 import React from 'react'
 import { MdEmail } from 'react-icons/md'
 import LinkItem from '../MobileMockup/components/LinkItem'
-import { useSelector } from 'react-redux'
 import { platforms } from '../LinkList/LinkList'
 import defaultPP from "../../../public/default_pp.png"
 

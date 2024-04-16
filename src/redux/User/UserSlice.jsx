@@ -66,7 +66,7 @@ const UserSlice = createSlice({
                     {
                         _id: newID,
                         platform: "Twitter",
-                        link: ""
+                        link: "https://"
                     }
                 ]
             }
