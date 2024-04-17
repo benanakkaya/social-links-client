@@ -5,11 +5,8 @@ import { RiDragMove2Fill } from "react-icons/ri"
 import { FaLink } from "react-icons/fa"
 import { useDispatch } from 'react-redux'
 import { deleteLink, editLink } from '@/redux/User/UserSlice'
-import { useSelector } from 'react-redux'
 
 const NewLink = ({ platforms, item, index, activeLink, setActiveLink,provided,setIsChanged }) => {
-
-    const {userInformation} = useSelector(state => state.user)
 
     const [listVisible, setListVisible] = useState(false);
 
@@ -37,7 +34,7 @@ const NewLink = ({ platforms, item, index, activeLink, setActiveLink,provided,se
     }
 
     const handleLink = (e, index) => {
-        dispatch(editLink({ platform: platform.name, link: e.target.value, index }))
+        dispatch(editLink({ platform: platform.name, link: e.target.value, index }));
         dispatch(setIsChanged(true));
     }
 
@@ -46,19 +43,15 @@ const NewLink = ({ platforms, item, index, activeLink, setActiveLink,provided,se
         setPlatform(platform)
     }, [item])
 
-    const urlControl = () => {
+    const urlControl = (e) => {
         const urlControl = /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
 
-        if(urlControl.test(item.link)){
+        if(urlControl.test(e.target.value)){
             setError(false);
         }else{
             setError(true);
         }
     }
-
-    useEffect(() => {
-        urlControl();
-    },[userInformation.links])
 
 
     return (
@@ -95,7 +88,7 @@ const NewLink = ({ platforms, item, index, activeLink, setActiveLink,provided,se
                 Link
                 <div className={`${error ? "border-red-500": "border-secondary "} border-[2px] px-3 py-2 bg-white flex items-center gap-2 text-sm rounded-lg relative`}>
                     <FaLink />
-                    <input onBlur={urlControl} value={item.link} onChange={(e) => handleLink(e, index)} placeholder={error ? '' :'e.g. https://www.twitter.com/elonmusk'} type="url" className={`flex-1 outline-none`} />
+                    <input onBlur={(e) => urlControl(e)} value={item.link} onChange={(e) => handleLink(e, index)} placeholder={error ? '' :'e.g. https://www.twitter.com/elonmusk'} type="url" className={`flex-1 outline-none`} />
                     {error && 
                     <span className='absolute  top-full right-0 mt-[5px] italic text-xs text-red-500'>
                         Please enter valid url!
