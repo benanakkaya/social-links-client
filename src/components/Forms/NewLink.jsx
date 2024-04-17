@@ -35,6 +35,7 @@ const NewLink = ({ platforms, item, index, activeLink, setActiveLink,provided,se
 
     const handleLink = (e, index) => {
         dispatch(editLink({ platform: platform.name, link: e.target.value, index }));
+        urlControl(e);
         dispatch(setIsChanged(true));
     }
 
