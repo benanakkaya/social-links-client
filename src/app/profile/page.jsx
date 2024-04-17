@@ -37,6 +37,10 @@ const ProfilePage = () => {
     }
 
     useEffect(() => {
+        dispatch(setIsChanged(false));
+      },[])
+
+    useEffect(() => {
         if (userInformation.username) {
             dispatch(getUser(userInformation.username))
         }
@@ -56,7 +60,7 @@ const ProfilePage = () => {
                             Add your details to create a personal touch to your profile.
                         </p>
                     </div>
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-6 ">
                         <AddProfilePicture />
                         <UserProfileForm errors={errors} setErrors={setErrors} userInformation={userInformation} />
                     </div>

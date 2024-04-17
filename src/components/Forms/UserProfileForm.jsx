@@ -37,13 +37,13 @@ const UserProfileForm = ({ userInformation, setErrors, errors }) => {
     }
 
     return (
-        <div className='bg-[#FAFAFA] text-[#737373] rounded-lg px-3'>
+        <div className='rounded-lg px-3'>
             <form className='flex flex-col gap-6'>
                 <label className='w-full grid grid-cols-4 gap-2 md:gap-5 items-center relative'>
                     <span className='col-span-4 md:col-span-1'>
                         First name
                     </span>
-                    <input onBlur={(e) => inputControl(e)} onChange={(e) => handleChange(e)} name='firstName' placeholder='e.g. John' value={userInformation.firstName} type='text' className={`${errors.firstName ? "border-red-500" : "border-gray-200"} col-span-4 md:col-span-3 px-4 py-3 rounded-lg border`} />
+                    <input onBlur={(e) => inputControl(e)} onChange={(e) => handleChange(e)} name='firstName' placeholder='e.g. John' value={userInformation.firstName} type='text' className={`${errors.firstName ? "border-red-500" : "border-secondary"} col-span-4 md:col-span-3 px-4 py-3 rounded-lg border-2`} />
                     {errors.firstName &&
                         <span className='absolute top-full mt-[5px] right-1 italic text-xs text-red-500'>
                             Please enter your first name!
@@ -54,7 +54,7 @@ const UserProfileForm = ({ userInformation, setErrors, errors }) => {
                     <span className='col-span-4 md:col-span-1'>
                         Last name
                     </span>
-                    <input onBlur={(e) => inputControl(e)} onChange={(e) => handleChange(e)} name='lastName' placeholder='e.g. Doe' value={userInformation.lastName} type='text' className={`${errors.lastName ? "border-red-500" : "border-gray-200"} col-span-4 md:col-span-3 px-4 py-3 rounded-lg border`} />
+                    <input onBlur={(e) => inputControl(e)} onChange={(e) => handleChange(e)} name='lastName' placeholder='e.g. Doe' value={userInformation.lastName} type='text' className={`${errors.lastName ? "border-red-500" : "border-secondary"} col-span-4 md:col-span-3 px-4 py-3 rounded-lg border-2`} />
                     {errors.lastName &&
                         <span className='absolute top-full mt-[5px] right-1 italic text-xs text-red-500'>
                             Please enter your last name!
@@ -65,7 +65,7 @@ const UserProfileForm = ({ userInformation, setErrors, errors }) => {
                     <span className='col-span-4 md:col-span-1'>
                         E-mail
                     </span>
-                    <input onBlur={(e) => inputControl(e)} onChange={(e) => handleChange(e)} name='email' placeholder='e.g. name@mail.com' value={userInformation.email} type='email' className={`${(errors.email.valid || errors.email.empty) ? "border-red-500" : "border-gray-200"} col-span-4 md:col-span-3 px-4 py-3 rounded-lg border`} />
+                    <input onBlur={(e) => inputControl(e)} onChange={(e) => handleChange(e)} name='email' placeholder='e.g. name@mail.com' value={userInformation.email} type='email' className={`${(errors.email.valid || errors.email.empty) ? "border-red-500" : "border-secondary"} col-span-4 md:col-span-3 px-4 py-3 rounded-lg border-2`} />
                     {(errors.email.valid || errors.email.empty) &&
                         <span className='absolute top-full mt-[5px] right-1 italic text-xs text-red-500'>
                             {errors.email.valid ?

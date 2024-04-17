@@ -21,7 +21,7 @@ const AddProfilePicture = () => {
     }
 
     return (
-        <label className='px-3 grid grid-cols-4 gap-2 md:gap-5 md:flex-row md:items-center justify-between bg-[#FAFAFA] text-[#737373] rounded-lg'>
+        <label className='px-3 grid grid-cols-4 gap-2 md:gap-5 md:flex-row md:items-center justify-between  rounded-lg'>
             <p className='col-span-4 md:col-span-1'>
                 Profile Picture
             </p>

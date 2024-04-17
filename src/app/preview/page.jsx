@@ -21,6 +21,10 @@ const PreviewPage = () => {
         }
       }, [pathname])
 
+      useEffect(() => {
+        dispatch(setIsChanged(false));
+      },[])
+
     return (
         <div className=' h-full w-full p-3 container flex flex-col gap-8 items-center'>
             <div style={{backgroundColor:userInformation.profileColor}} className='bg-primary h-2/5 absolute rounded-b-3xl left-0 top-0 right-0 -z-10'>

@@ -60,6 +60,10 @@ export default function Home() {
     linksControl();
   }, [userInformation.links])
 
+  useEffect(() => {
+    dispatch(setIsChanged(false));
+  },[])
+
   const handleDiscardChanges = () => {
     dispatch(swapLinks(backupInformation.links));
     dispatch(setIsChanged(false));
