@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { usePathname } from 'next/navigation'
 import { useDispatch } from 'react-redux'
-import { getUser } from '@/redux/User/UserSlice'
+import { getUser, setIsChanged } from '@/redux/User/UserSlice'
 import PreviewList from '@/components/PreviewList/PreviewList'
 
 const PreviewPage = () => {
