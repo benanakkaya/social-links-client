@@ -1,37 +1,94 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Social Links
 
-First, run the development server:
+> This is a web project that allows you to share all your social media links through a structured link specific to your username.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+> Live demo [here](https://social-links-frontend.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Table of Contents
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+* [General Info](#general-information)
 
-## Learn More
+* [Major Technologies Used](#technologies-used)
 
-To learn more about Next.js, take a look at the following resources:
+* [Features](#features)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* [Screenshots](#screenshots)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+* [Gifs](#gifs)
 
-## Deploy on Vercel
+* [Project Status](#project-status)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* [Contact](#contact)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-"# social-links-frontend" 
+  
+  
+  
+
+## Major Technologies Used
+
+- Next.js
+
+- Redux Toolkit
+
+- Tailwind
+
+- Cookies (to manage user sessions)
+
+  
+  
+
+## Features
+
+  
+
+- Registration and Login
+
+- Upload an avatar for your profile
+
+- Organise the order of your links by dragging them
+
+- Discard your changes before saving
+
+- Hide your email or make it public
+
+- Customise the page on which your links are displayed by selecting a colour
+
+  
+  
+
+## Screenshots
+![ss1](https://res.cloudinary.com/dmsj8hghq/image/upload/fl_preserve_transparency/v1715600428/FireShot_Capture_172_-_Social_Links_-_social-links-frontend.vercel.app_xffarx.jpg)
+
+![ss2](https://res.cloudinary.com/dmsj8hghq/image/upload/fl_preserve_transparency/v1715600472/FireShot_Capture_173_-_Social_Links_-_social-links-frontend.vercel.app_mrib47.jpg)
+
+![ss3](https://res.cloudinary.com/dmsj8hghq/image/upload/fl_preserve_transparency/v1715600677/FireShot_Capture_174_-_Social_Links_-_social-links-frontend.vercel.app_juet1n.jpg)
+
+  
+
+## Gifs
+
+ - Add New Link
+
+![gif1](https://res.cloudinary.com/dmsj8hghq/image/upload/fl_preserve_transparency/v1715353083/NewLink_roh2pe.gif)
+
+ - Profile Edit
+
+![gif2](https://res.cloudinary.com/dmsj8hghq/image/upload/fl_preserve_transparency/v1715353081/ProfileEdit_wepugm.gif)
+
+
+  
+  
+
+## Project Status
+
+Project is: _complete_
+
+  
+  
+
+## Contact
+
+Developed by [@benanakkaya](https://www.linkedin.com/in/benanakkaya/) - feel free to contact me!
