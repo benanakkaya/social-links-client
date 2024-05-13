@@ -3,7 +3,7 @@
 
 > This is a web project that allows you to share all your social media links through a structured link specific to your username.
 
-> Live demo [here](https://social-links-frontend.vercel.app/)
+> Live demo [here](https://tmdb-movie-app-benan.netlify.app/)
 
   
 
