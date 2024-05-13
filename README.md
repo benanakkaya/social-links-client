@@ -9,8 +9,6 @@
 
 ## Table of Contents
 
-* [General Info](#general-information)
-
 * [Major Technologies Used](#technologies-used)
 
 * [Features](#features)
